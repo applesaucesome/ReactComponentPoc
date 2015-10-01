@@ -1,6 +1,7 @@
 import React from 'react';
 import TitleItem from './title-item';
-import InputTile from './input-tile';
+import Input from './input';
+
 
 class Ideas extends React.Component {
     constructor(props) {
@@ -11,22 +12,14 @@ class Ideas extends React.Component {
         this.state = {
             changeContent: true,
             initialCount: this.props.initialCount,
-            inputText: ''
+            inputText: '',
+            editTag: false,
+            currentTitle: null,
+            maxTitles: 5
         };
 
     }
 
-    componentWillMount() {
-
-
-    }
-    componentWillUnmount() {
-
-    }
-    componentDidMount() {
-
-
-    }
 
     removeItem(id) {
         // this.removeElement(e.target);
@@ -39,6 +32,35 @@ class Ideas extends React.Component {
             'initialCount': this.state.initialCount
         });
 
+
+
+    }
+    titleDoubleClick(id, e) {
+        
+        e.persist();
+
+        console.log('title - double clicked!', e.target.parentNode.innerText);
+        this.setState({
+            editTag: true,
+            currentTitle: id
+        });
+
+
+    }
+    handleTitleEdit(e, id, text){
+
+
+        console.log('id=', id);
+        console.log('text=', text);
+
+
+        this.state.initialCount.splice(id, 1, { title: text });
+
+        
+        this.setState({
+            'initialCount': this.state.initialCount,
+            'editTag': false
+        });
 
 
     }
@@ -59,8 +81,16 @@ class Ideas extends React.Component {
         });
 
 
+
     }
     render() {
+
+        var inputEl,
+            editTagAttr;
+
+        if (this.state.initialCount.length < this.state.maxTitles) {
+            inputEl = <Input handleInputEnter={this.handleInputEnter.bind(this)} />;
+        }        
 
         return (
             <div>
@@ -69,13 +99,24 @@ class Ideas extends React.Component {
                 
                 {
                     this.state.initialCount.map(function(item, i) {
+
+                        if (i === this.state.currentTitle) {
+                            editTagAttr = this.state.editTag;
+                        } else {
+                            editTagAttr = false;
+                        }
+
                         return (
-                            <TitleItem removeItem={this.removeItem.bind(this, i)} key={i} {...item}></TitleItem>
+                            <TitleItem editTag={editTagAttr} titleDoubleClick={this.titleDoubleClick.bind(this, i)} handleTitleEdit={this.handleTitleEdit.bind(this)} removeItem={this.removeItem.bind(this, i)} id={i} {...item} />
                         );
+                        
+                        
                     }, this)
-                
                 }
-                <InputTile handleInputEnter={this.handleInputEnter.bind(this)} />
+
+
+                {inputEl}
+                
             </div>
         );
 

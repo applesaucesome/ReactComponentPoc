@@ -4,41 +4,35 @@ class InputTile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-
+        // console.log('Input Tile -', props)
     }
-    componentWillMount() {
 
-
-    }
-    componentWillUnmount() {
-
-    }
-    componentDidMount() {
-
-    }
     onChange(e) {
         this.setState({
             message: e.target.value
         });
     }
-    onEnterKey(e) {
-        e.persist();
+    onEnterKey(i, e) {
+
+        var text = e.target.value;
+
+        
 
         if (e.keyCode === 13) {
-            console.log(e.target.value);
-
-            this.props.handleInputEnter(e);
+            
 
             this.setState({
                 message: ''
             });
+
+            this.props.handleTitleEdit(e, i, text);
 
         }
     }
 
     render() {
         return (
-            <input className="titleInput" value={this.state.message} onChange={this.onChange.bind(this)} onKeyUp={this.onEnterKey.bind(this)} />
+            <input className="titleInput" value={this.state.message} onChange={this.onChange.bind(this)} onKeyUp={this.onEnterKey.bind(this, this.props.id)} />
         );
     }
 }
