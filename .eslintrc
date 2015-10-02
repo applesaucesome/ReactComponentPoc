@@ -1,5 +1,14 @@
 {
+
+    "parser": "babel-eslint",
     "rules": {
+        "no-unused-vars": [
+            1, 
+            {
+                "vars": "all",
+                "args": "after-used"
+            }
+        ],
         "yoda": [
             2, 
             "never"
@@ -16,7 +25,7 @@
             4
         ],
         "quotes": [
-            2,
+            1,
             "single"
         ],
         "linebreak-style": [
@@ -24,11 +33,10 @@
             "unix"
         ],
         "semi": [
-            2,
+            1,
             "always"
         ],
         "eqeqeq": 2,
-        "yoda": 2,
         "react/jsx-uses-react": 2,
         "react/jsx-uses-vars": 2,
         "react/react-in-jsx-scope": 2

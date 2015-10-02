@@ -13,9 +13,9 @@ class InputTile extends React.Component {
         });
     }
     onEnterKey(e) {
-        e.persist();
+        // e.persist();
 
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 || e.keyCode === 9) {
             console.log(e.target.value);
 
             this.props.handleInputEnter(e);
@@ -29,7 +29,7 @@ class InputTile extends React.Component {
 
     render() {
         return (
-            <input className="titleInput" value={this.state.message} onChange={this.onChange.bind(this)} onKeyUp={this.onEnterKey.bind(this)} />
+            <input className="titleInput" value={this.state.message} onChange={this.onChange.bind(this)} onKeyDown={this.onEnterKey.bind(this)}/>
         );
     }
 }

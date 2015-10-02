@@ -14,11 +14,11 @@ class InputTile extends React.Component {
     }
     onEnterKey(i, e) {
 
-        var text = e.target.value;
+        const text = e.target.value;
 
         
 
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 || e.keyCode === 9) {
             
 
             this.setState({
@@ -32,7 +32,7 @@ class InputTile extends React.Component {
 
     render() {
         return (
-            <input className="titleInput" value={this.state.message} onChange={this.onChange.bind(this)} onKeyUp={this.onEnterKey.bind(this, this.props.id)} />
+            <input className="titleInput" value={this.state.message} onChange={this.onChange.bind(this)} onKeyDown={this.onEnterKey.bind(this, this.props.id)} />
         );
     }
 }

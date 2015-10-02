@@ -3,7 +3,7 @@ import TitleItem from './title-item';
 import Input from './input';
 
 
-class Ideas extends React.Component {
+class Tagging extends React.Component {
     constructor(props) {
         super(props);
 
@@ -70,7 +70,7 @@ class Ideas extends React.Component {
         // e.persist();
 
 
-        let inputText = e.target.value;
+        const inputText = e.target.value;
 
         this.state.initialCount.push({
             title: inputText
@@ -85,7 +85,7 @@ class Ideas extends React.Component {
     }
     render() {
 
-        var inputEl,
+        let inputEl,
             editTagAttr;
 
         if (this.state.initialCount.length < this.state.maxTitles) {
@@ -94,8 +94,8 @@ class Ideas extends React.Component {
 
         return (
             <div>
-                <h2>Ideas</h2>
-                <p>List all ideas</p>
+                <h2>Tagging</h2>
+                <p>List all Tags</p>
                 
                 {
                     this.state.initialCount.map(function(item, i) {
@@ -123,10 +123,10 @@ class Ideas extends React.Component {
     }
 
 }
-Ideas.propTypes = {
+Tagging.propTypes = {
     initialCount: React.PropTypes.array
 };
-Ideas.defaultProps = {
+Tagging.defaultProps = {
     initialCount: [{
         title: 'hi'
     }, {
@@ -136,4 +136,4 @@ Ideas.defaultProps = {
     }]
 };
 
-export default Ideas;
+export default Tagging;
