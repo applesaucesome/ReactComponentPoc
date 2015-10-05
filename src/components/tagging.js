@@ -96,7 +96,7 @@ class Tagging extends React.Component {
             <div>
                 <h2>Tagging</h2>
                 <p>List all Tags</p>
-                
+
                 {
                     this.state.initialCount.map(function(item, i) {
 

@@ -3,12 +3,13 @@ var webpack = require('webpack'),
     path = require('path'),
     srcPath = path.join(__dirname, 'src');
 
+
 module.exports = {
     target: 'web',
     cache: true,
     entry: {
         module: path.join(srcPath, 'module.js'),
-        common: ['react', 'react-router', ]
+        common: ['react', 'react-router']
     },
     resolve: {
         root: srcPath,
@@ -24,15 +25,32 @@ module.exports = {
     },
 
     module: {
-        loaders: [{
-            test: /\.js?$/,
-            exclude: /node_modules/,
-            loader: 'babel?cacheDirectory'
-        }]
+        loaders: [
+            {
+                test: /\.js?$/,
+                exclude: /node_modules/,
+                loader: 'babel?cacheDirectory'
+            }
+        ]
     },
     plugins: [
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 15
+        }),
+        new webpack.optimize.MinChunkSizePlugin({
+            minChunkSize: 10000
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin([{
+            sourceMap: false
+        }]),
+        new webpack.DefinePlugin({
+            'process.env': {
+                // This has effect on the react lib size
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
         new webpack.optimize.CommonsChunkPlugin('common', 'common.js'),
-        new webpack.optimize.UglifyJsPlugin([{}]),
         new HtmlWebpackPlugin({
             inject: true,
             template: 'src/index.html'
@@ -40,7 +58,7 @@ module.exports = {
         new webpack.NoErrorsPlugin()
     ],
 
-    debug: true,
+    debug: false,
     devtool: 'eval-cheap-module-source-map',
     devServer: {
         contentBase: './tmp',

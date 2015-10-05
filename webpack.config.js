@@ -9,7 +9,7 @@ module.exports = {
     cache: true,
     entry: {
         module: path.join(srcPath, 'module.js'),
-        common: ['react', 'react-router']
+        common: ['history', 'react', 'react-router']
     },
     resolve: {
         root: srcPath,
@@ -25,11 +25,13 @@ module.exports = {
     },
 
     module: {
-        loaders: [{
-            test: /\.js?$/,
-            exclude: /node_modules/,
-            loader: 'babel?cacheDirectory'
-        }]
+        loaders: [
+            {
+                test: /\.js?$/,
+                exclude: /node_modules/,
+                loader: 'babel?cacheDirectory'
+            }
+        ]
     },
     plugins: [
         new webpack.optimize.LimitChunkCountPlugin({
