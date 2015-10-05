@@ -5,13 +5,22 @@ class SubHeader extends React.Component {
         super(props);
     }
     render() {
-        return (
+        if (this.props.userId) {
+            return (
+                <div>
+                <h5>SUB HEADER COMPONENT</h5>
+                </div>
+            );
 
-            <div>
-            <h5>SUB HEADER COMPONENT</h5>
+        } else {
 
-            </div>
-        );
+            return (
+                <div>
+                <h5>SUB HEADER COMPONENT - {this.props.userId}</h5>
+                </div>
+            );
+            
+        }
     }
 }
 

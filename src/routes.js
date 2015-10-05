@@ -16,6 +16,10 @@ const routes = (
         <Route path="user" component={SubHeader} />
     </Route>
 
+    <Route path='route3' component={Header}>
+        <Route path="user/:userId" component={SubHeader} />
+    </Route>
+
     
   </Route>
 );
