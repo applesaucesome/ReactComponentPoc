@@ -32,8 +32,6 @@ class Tagging extends React.Component {
             'initialCount': this.state.initialCount
         });
 
-
-
     }
     titleDoubleClick(id, e) {
         

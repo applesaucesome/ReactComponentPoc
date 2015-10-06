@@ -19,7 +19,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'tmp'),
         publicPath: '',
-        filename: '[name].js',
+        filename: '/[name].js',
         library: ['Example', '[name]'],
         pathInfo: true
     },
@@ -45,12 +45,12 @@ module.exports = {
             sourceMap: false
         }]),
         new webpack.DefinePlugin({
-            'process.env': {
+            /*'process.env': {
                 // This has effect on the react lib size
                 'NODE_ENV': JSON.stringify('production')
-            }
+            }*/
         }),
-        new webpack.optimize.CommonsChunkPlugin('common', 'common.js'),
+        new webpack.optimize.CommonsChunkPlugin('common', '/common.js'),
         new HtmlWebpackPlugin({
             inject: true,
             template: 'src/index.html'

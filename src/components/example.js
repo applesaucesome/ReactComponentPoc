@@ -44,7 +44,7 @@ class Tagging extends React.Component {
         // this.removeElement(e.target);
         // e.persist();
         console.log('removeItem changed!', id);
-        DummyActions.spliceCount();
+
 
         this.state.initialCount.splice(id, 1);
         this.setState({

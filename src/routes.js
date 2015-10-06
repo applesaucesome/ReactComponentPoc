@@ -1,15 +1,18 @@
 import React from 'react';
-import Route from 'react-router';
+import {IndexRoute, Route} from 'react-router';
 
 import Main from 'components/main';  
 import Example from 'components/example';
 import Header from 'components/header';
 import SubHeader from 'components/subheader';
 
+import Tagging from 'components/tagging/component';
+import FluxComponent from 'components/flux-component/component';
 
 const routes = (  
   <Route path='/' component={Main}>
-    <Route path='route1' component={Example}/>
+    <IndexRoute component={FluxComponent}/>
+    <Route path='route1' component={Tagging}/>
 
 
     <Route path='route2' component={Header}>
