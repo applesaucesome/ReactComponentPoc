@@ -21,8 +21,6 @@ class Tagging extends React.Component {
         super(props);
         this.state = Store.getState();
 
-        console.log('this state=', this.state);
-
 
     }
     static getStores(props) {
@@ -33,21 +31,35 @@ class Tagging extends React.Component {
         return Store.getState();
     }
 
-    removeItem(id){
+    handleCancelEdit(e){
+        const data = {e}
+        Actions.onCancelEdit(data);
+    }
+
+    handleRemoveItem(id){
         const data = {id}
-        Actions.removeItem(data);
+        Actions.onRemoveItem(data);
     }
-    titleDoubleClick(id, e){
+
+    handleTitleDoubleClick(id, e){
         const data = {id, e}
-        Actions.titleDoubleClick(data);
+        Actions.onTitleDoubleClick(data);
     }
+
     handleTitleEdit(e, id, text){
-        const data = {e, id, text}
-        Actions.handleTitleEdit(data);
+        const data = {e, id, text, this}
+        Actions.onTitleEdit(data);
     }
+
     handleInputEnter(e){
         const data = {e}
-        Actions.handleInputEnter(data);
+        Actions.onInputEnter(data);
+    }
+    handleTagEntry(e) {
+
+        const data = {e}
+        Actions.onTagEntry(data);
+
     }
     render() {
 
@@ -55,31 +67,38 @@ class Tagging extends React.Component {
             editTagAttr;
 
         if (this.state.initialCount.length < this.state.maxTitles) {
-            inputEl = <Input handleInputEnter={this.handleInputEnter.bind(this)} />;
+            inputEl = <Input ref="tagEntry" handleInputEnter={this.handleInputEnter.bind(this)} handleTagEntry={this.handleTagEntry.bind(this)} />;
         }        
 
         return (
             <div>
-                <h2>Tagging</h2>
-                <p>List all Tags</p>
 
                 {
                     this.state.initialCount.map(function(item, i) {
 
-                        if (i === this.state.currentTitle) {
-                            editTagAttr = this.state.editTag;
+                        if (i === this.props.currentTitle) {
+                            editTagAttr = this.props.editTag;
                         } else {
                             editTagAttr = false;
                         }
 
                         return (
-                            <TitleItem editTag={editTagAttr} titleDoubleClick={this.titleDoubleClick.bind(this, i)} handleTitleEdit={this.handleTitleEdit.bind(this)} removeItem={this.removeItem.bind(this, i)} id={i} {...item} />
+                            <TitleItem 
+                                handleCancelEdit={this.handleCancelEdit.bind(this)}
+                                handleTagEntry={this.handleTagEntry.bind(this)} 
+                                handleTitleDoubleClick={this.handleTitleDoubleClick.bind(this, i)} 
+                                handleTitleEdit={this.handleTitleEdit.bind(this)} 
+                                handleRemoveItem={this.handleRemoveItem.bind(this, i)} 
+                                editTag={editTagAttr} 
+                                id={i} 
+                                key={i} 
+                                {...item} 
+                            />
                         );
                         
                         
                     }, this)
                 }
-
 
                 {inputEl}
                 

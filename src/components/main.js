@@ -11,7 +11,7 @@ class Main extends React.Component {
         return (
             <div>
                 <h1>Example</h1>
-                
+                <div><Link to='/' activeClassName="active">Home</Link></div>
                 <div><Link to='/route1' activeClassName="active">Go to the route1 page</Link></div>
                 <div><Link to='/route2' activeClassName="active">Go to the route2 page</Link></div>
                 <div><Link to="/route2/user" activeClassName="active">Subroute header</Link></div>

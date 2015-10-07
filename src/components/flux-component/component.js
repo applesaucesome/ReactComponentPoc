@@ -1,6 +1,6 @@
 import React from 'react';
-import Actions from 'actions/actions';
-import Store from 'stores/store';
+import Actions from './actions';
+import Store from './store';
 import connectToStores from 'alt/utils/connectToStores';
 
 /**

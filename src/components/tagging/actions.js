@@ -4,7 +4,7 @@ import {createActions} from 'alt/utils/decorators';
 @createActions(flux)
 class Actions {
     constructor() {
-        this.generateActions('removeItem', 'titleDoubleClick', 'handleTitleEdit', 'handleInputEnter');
+        this.generateActions('onCancelEdit', 'onRemoveItem', 'onTitleDoubleClick', 'onTitleEdit', 'onInputEnter', 'onTagEntry');
 
     }
 }

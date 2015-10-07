@@ -1,3 +1,4 @@
+import React from 'react';
 import flux from 'control';
 import {
     createStore, bind
@@ -18,43 +19,50 @@ class Store {
                 title: 'hello'
             }, {
                 title: 'bye'
-            }]
+            }],
+            changeContent: true,
+            inputText: '',
+            editTag: false,
+            currentTitle: undefined,
+            maxTitles: 5
         };
+    }
+
+    @bind(actions.onCancelEdit)
+    cancelTagEdit(data) {
+
+        this.setState({
+            editTag: false
+        });
+
     }
 
 
 
-    @bind(actions.removeItem)
+    @bind(actions.onRemoveItem)
     removeItem(data) {
-        
-        console.log('data=', data);
-
 
         this.state.initialCount.splice(data.id, 1);
 
         this.setState({
-            initialCount: 'this.state.initialCount'
+            initialCount: this.state.initialCount
         });
 
     }
 
-    @bind(actions.titleDoubleClick)
+    @bind(actions.onTitleDoubleClick)
     titleDoubleClick(data) {
         
-        console.log('data=', data);
-
         this.setState({
             editTag: true,
             currentTitle: data.id
         });
+
     }
 
-    @bind(actions.handleTitleEdit)
-    handleTitleEdit(data) {
+    @bind(actions.onTitleEdit)
+    titleEdit(data) {
         
-        console.log('data=', data);
-
-
         this.state.initialCount.splice(data.id, 1, {
             title: data.text
         });
@@ -63,13 +71,14 @@ class Store {
             initialCount: this.state.initialCount,
             editTag: false
         });
+
+        // Refocus to input once you edit a tag
+        React.findDOMNode(data.this.refs.tagEntry.refs.tagEntryInput).focus();
+
     }
 
-    @bind(actions.handleInputEnter)
-    handleInputEnter(data) {
-        
-        console.log('data=', data);
-
+    @bind(actions.onInputEnter)
+    inputEnter(data) {
 
         const inputText = data.e.target.value;
 
@@ -78,6 +87,20 @@ class Store {
         });
     }
 
+    @bind(actions.onTagEntry)
+    newTagEnter(data) {     
+
+        const inputText = data.e.target.value;
+
+        this.state.initialCount.push({
+            title: inputText
+        });
+
+        this.setState({
+            initialCount: this.state.initialCount
+        });
+   
+    }
 
 }
 

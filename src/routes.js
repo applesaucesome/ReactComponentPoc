@@ -2,17 +2,16 @@ import React from 'react';
 import {IndexRoute, Route} from 'react-router';
 
 import Main from 'components/main';  
-import Example from 'components/example';
 import Header from 'components/header';
 import SubHeader from 'components/subheader';
 
-import Tagging from 'components/tagging/component';
+import PitchPhase from 'components/pitch-phase/component';
 import FluxComponent from 'components/flux-component/component';
 
 const routes = (  
   <Route path='/' component={Main}>
     <IndexRoute component={FluxComponent}/>
-    <Route path='route1' component={Tagging}/>
+    <Route path='route1' component={PitchPhase}/>
 
 
     <Route path='route2' component={Header}>
