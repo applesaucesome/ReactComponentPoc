@@ -2,9 +2,10 @@ import React from 'react';
 import Actions from './actions';
 import Store from './store';
 import connectToStores from 'alt/utils/connectToStores';
-import TitleItem from '../title-item';
+import Tags from '../title-item';
 import Input from '../input';
 
+import AltContainer from 'alt/AltContainer';
 /**
 *
 * need to make sure the "@connectToStores" decorator is the outermost decorator to ensure that your other decorators are applied to your actual component rather than the wrapped component
@@ -15,7 +16,7 @@ import Input from '../input';
 * @anotherDecorator
 *
 **/
-@connectToStores
+
 class Tagging extends React.Component {
     constructor(props) {
         super(props);
@@ -42,6 +43,7 @@ class Tagging extends React.Component {
     }
 
     handleTitleDoubleClick(id, e){
+
         const data = {id, e}
         Actions.onTitleDoubleClick(data);
     }
@@ -51,58 +53,26 @@ class Tagging extends React.Component {
         Actions.onTitleEdit(data);
     }
 
-    handleInputEnter(e){
-        const data = {e}
-        Actions.onInputEnter(data);
-    }
     handleTagEntry(e) {
 
         const data = {e}
         Actions.onTagEntry(data);
 
     }
+
     render() {
 
-        let inputEl,
-            editTagAttr;
-
-        if (this.state.initialCount.length < this.state.maxTitles) {
-            inputEl = <Input ref="tagEntry" handleInputEnter={this.handleInputEnter.bind(this)} handleTagEntry={this.handleTagEntry.bind(this)} />;
-        }        
+ 
 
         return (
-            <div>
+            <AltContainer
+            store={Store}
+            actions={Actions}
+            >
 
-                {
-                    this.state.initialCount.map(function(item, i) {
+            <Tags />
 
-                        if (i === this.props.currentTitle) {
-                            editTagAttr = this.props.editTag;
-                        } else {
-                            editTagAttr = false;
-                        }
-
-                        return (
-                            <TitleItem 
-                                handleCancelEdit={this.handleCancelEdit.bind(this)}
-                                handleTagEntry={this.handleTagEntry.bind(this)} 
-                                handleTitleDoubleClick={this.handleTitleDoubleClick.bind(this, i)} 
-                                handleTitleEdit={this.handleTitleEdit.bind(this)} 
-                                handleRemoveItem={this.handleRemoveItem.bind(this, i)} 
-                                editTag={editTagAttr} 
-                                id={i} 
-                                key={i} 
-                                {...item} 
-                            />
-                        );
-                        
-                        
-                    }, this)
-                }
-
-                {inputEl}
-                
-            </div>
+            </AltContainer>
         );
     }
 }

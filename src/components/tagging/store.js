@@ -23,7 +23,7 @@ class Store {
             changeContent: true,
             inputText: '',
             editTag: false,
-            currentTitle: undefined,
+            currentTitle: 0,
             maxTitles: 5
         };
     }
@@ -42,7 +42,7 @@ class Store {
     @bind(actions.onRemoveItem)
     removeItem(data) {
 
-        this.state.initialCount.splice(data.id, 1);
+        this.state.initialCount.splice(data[0], 1);
 
         this.setState({
             initialCount: this.state.initialCount
@@ -53,10 +53,13 @@ class Store {
     @bind(actions.onTitleDoubleClick)
     titleDoubleClick(data) {
         
+        console.log('titleDoubleClick data -', arguments);
+
         this.setState({
             editTag: true,
-            currentTitle: data.id
+            currentTitle: data[0]
         });
+
 
     }
 
@@ -77,18 +80,11 @@ class Store {
 
     }
 
-    @bind(actions.onInputEnter)
-    inputEnter(data) {
-
-        const inputText = data.e.target.value;
-
-        this.setState({
-            title: inputText
-        });
-    }
 
     @bind(actions.onTagEntry)
     newTagEnter(data) {     
+        
+        console.log('newTagEnter=', data);
 
         const inputText = data.e.target.value;
 

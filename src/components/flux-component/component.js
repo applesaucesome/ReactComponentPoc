@@ -2,7 +2,9 @@ import React from 'react';
 import Actions from './actions';
 import Store from './store';
 import connectToStores from 'alt/utils/connectToStores';
+import AltContainer from 'alt/AltContainer';
 
+import Header from '../header';
 /**
 *
 * need to make sure the "@connectToStores" decorator is the outermost decorator to ensure that your other decorators are applied to your actual component rather than the wrapped component
@@ -13,7 +15,7 @@ import connectToStores from 'alt/utils/connectToStores';
 * @anotherDecorator
 *
 **/
-@connectToStores
+
 class TestComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -22,17 +24,11 @@ class TestComponent extends React.Component {
         // console.log(this.props);
 
     }
-    static getStores(props) {
-        return [Store];
-    }
-
-    static getPropsFromStores(props) {
-        return Store.getState();
-    }
 
     onButtonClick(){
 
         Actions.doAnAction('bar');
+
 
     }
     resetInput(){
@@ -52,12 +48,16 @@ class TestComponent extends React.Component {
 
         return (
 
-            <div style={divStyle}>
-            <h1>Flux Test Component</h1>
-            <input className="testInput" value={this.props.value} />
-            <div style={buttonStyle} className="myButton" onClick={this.onButtonClick}>Test Button</div>
-            <div style={buttonStyle} className="resetButton" onClick={this.resetInput}>Reset</div>
-            </div>
+            <AltContainer 
+            store={Store}
+            actions={Actions}
+            style={divStyle}>
+                <Header />
+                <h1>Flux Test Component</h1>
+                <input className="testInput" value={this.props.value} />
+                <div style={buttonStyle} className="myButton" onClick={this.onButtonClick}>Test Button</div>
+                <div style={buttonStyle} className="resetButton" onClick={this.resetInput}>Reset</div>
+            </AltContainer>
         );
     }
 }

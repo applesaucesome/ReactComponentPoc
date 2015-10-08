@@ -13,7 +13,12 @@ class Header extends React.Component {
 
             <div>
             <h1>TEST HEADER COMPONENT</h1>
-                {this.props.children || 'Welcome to your Inbox'}
+
+                {
+                    this.props.test.map(function(item, i){
+                        return( <h5>{item}</h5>);
+                    })
+                }
             </div>
         );
     }

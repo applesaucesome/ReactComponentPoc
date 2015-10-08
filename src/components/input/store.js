@@ -12,18 +12,14 @@ class DummyStore {
 
         // give a default value
         this.state = {
-            value: 'foo',
-            test: [1,2,3,4]
+            value: 'foo'
         };
     }
 
     @bind(actions.doAnAction)
-    onUpdateCity(val) {
+    onUpdate(val) {
 
-        
-        this.setState({
-            value: val
-        });
+
         
     }
 

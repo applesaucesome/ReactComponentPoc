@@ -4,7 +4,6 @@ class Input extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        console.log('input props', this.props)
 
     }
     
@@ -33,7 +32,7 @@ class Input extends React.Component {
                 this.props.handleTitleEdit(e, i, text);
             } else {
                 // if 'i' is undefined that means it's the tag entry input not the tag edit input
-                this.props.onTagEntry({e: e, text: text});
+                this.props.handleTagEntry(e);
             }
             
         }
