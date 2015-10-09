@@ -1,5 +1,5 @@
 import React from 'react/addons';
-import Input from './input';
+import Input from '../input';
 
 class Tags extends React.Component {
 
@@ -7,29 +7,33 @@ class Tags extends React.Component {
         // you must pass props every time you have props and you don't set them with 'this.props = props' manually
         super(props);
         this.state = {};
-        console.log('title item props', props)
 
+    }
+    componentDidMount(){
+        
+        this.props.onMount(this.refs);
+        
     }
     render() {
 
         let tag = '';
         let inputEl;
 
+        if (this.props.initialCount.length < this.props.maxTitles) {
+            inputEl = <Input ref="tagEntry" onTagEntry={this.props.onTagEntry.bind(this)} />;
+        }
+
         return (
             <div>
                 {
+
                     this.props.initialCount.map(function(item, i) {
 
-                        let editTagAttr;
+                        let editTagAttr = false;
 
-                        if (this.props.initialCount.length < this.props.maxTitles) {
-                            inputEl = <Input ref="tagEntry" onTagEntry={this.props.onTagEntry.bind(this)} />;
-                        }
-
+    
                         if (i === this.props.currentTitle) {
                             editTagAttr = this.props.editTag;
-                        } else {
-                            editTagAttr = false;
                         }
 
                         if (!editTagAttr) {
@@ -42,7 +46,7 @@ class Tags extends React.Component {
                                 </div>;                            
 
                         } else {
-                            tag = <Input {...this.props} editTag={editTagAttr} handleTitleEdit={this.props.handleTitleEdit} handleTagEntry={this.props.handleTagEntry} id={this.props.id} />;
+                            tag = <Input ref="tagEdit" {...this.props} editTag={editTagAttr} handleTitleEdit={this.props.handleTitleEdit} handleTagEntry={this.props.handleTagEntry} id={this.props.id} />;
 
                         }
 

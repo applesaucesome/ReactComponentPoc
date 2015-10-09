@@ -24,8 +24,19 @@ class Store {
             inputText: '',
             editTag: false,
             currentTitle: 0,
-            maxTitles: 5
+            maxTitles: 5,
+            refs: undefined
         };
+    }
+
+    @bind(actions.onMount)
+    onComponentMount(data){
+        
+        this.setState({
+            refs: data
+        })
+
+
     }
 
     @bind(actions.onCancelEdit)
@@ -34,6 +45,10 @@ class Store {
         this.setState({
             editTag: false
         });
+
+        if (this.state.initialCount.length < this.state.maxTitles) {
+            React.findDOMNode(this.state.refs.tagEntry.refs.tagEntryInput).focus();
+        }
 
     }
 
@@ -53,7 +68,9 @@ class Store {
     @bind(actions.onTitleDoubleClick)
     titleDoubleClick(data) {
         
-        console.log('titleDoubleClick data -', arguments);
+        // console.log('titleDoubleClick arguments -', arguments);
+        // console.log('titleDoubleClick data -', data);
+        // console.log('titleDoubleClick this -', this);
 
         this.setState({
             editTag: true,
@@ -65,9 +82,10 @@ class Store {
 
     @bind(actions.onTitleEdit)
     titleEdit(data) {
+        // console.log('titleEdit', data)
         
-        this.state.initialCount.splice(data.id, 1, {
-            title: data.text
+        this.state.initialCount.splice(this.state.currentTitle, 1, {
+            title: data[2]
         });
 
         this.setState({
@@ -75,8 +93,12 @@ class Store {
             editTag: false
         });
 
+        console.log('this.state.initialCount=', this.state.initialCount)
+        console.log('this.state.maxTitles=', this.state.maxTitles)
         // Refocus to input once you edit a tag
-        React.findDOMNode(data.this.refs.tagEntry.refs.tagEntryInput).focus();
+        if (this.state.initialCount.length < this.state.maxTitles) {
+            React.findDOMNode(this.state.refs.tagEntry.refs.tagEntryInput).focus();
+        }
 
     }
 
@@ -84,7 +106,7 @@ class Store {
     @bind(actions.onTagEntry)
     newTagEnter(data) {     
         
-        console.log('newTagEnter=', data);
+        // console.log('newTagEnter=', data);
 
         const inputText = data.e.target.value;
 

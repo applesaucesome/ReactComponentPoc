@@ -2,7 +2,7 @@ import React from 'react';
 import Actions from './actions';
 import Store from './store';
 import connectToStores from 'alt/utils/connectToStores';
-import Tags from '../title-item';
+import Tags from '../title-item/component';
 import Input from '../input';
 
 import AltContainer from 'alt/AltContainer';
@@ -16,7 +16,7 @@ import AltContainer from 'alt/AltContainer';
 * @anotherDecorator
 *
 **/
-
+// @connectToStores
 class Tagging extends React.Component {
     constructor(props) {
         super(props);
@@ -24,13 +24,13 @@ class Tagging extends React.Component {
 
 
     }
-    static getStores(props) {
+    /*static getStores(props) {
         return [Store];
     }
 
     static getPropsFromStores(props) {
         return Store.getState();
-    }
+    }*/
 
     handleCancelEdit(e){
         const data = {e}
@@ -59,10 +59,8 @@ class Tagging extends React.Component {
         Actions.onTagEntry(data);
 
     }
-
+    
     render() {
-
- 
 
         return (
             <AltContainer
