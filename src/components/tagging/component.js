@@ -1,11 +1,11 @@
 import React from 'react';
 import Actions from './actions';
 import Store from './store';
-import connectToStores from 'alt/utils/connectToStores';
-import Tags from '../title-item/component';
-import Input from '../input';
+// import connectToStores from 'alt/utils/connectToStores';
 
+import Tags from '../tag-item/component';
 import AltContainer from 'alt/AltContainer';
+
 /**
 *
 * need to make sure the "@connectToStores" decorator is the outermost decorator to ensure that your other decorators are applied to your actual component rather than the wrapped component
@@ -32,33 +32,6 @@ class Tagging extends React.Component {
         return Store.getState();
     }*/
 
-    handleCancelEdit(e){
-        const data = {e}
-        Actions.onCancelEdit(data);
-    }
-
-    handleRemoveItem(id){
-        const data = {id}
-        Actions.onRemoveItem(data);
-    }
-
-    handleTitleDoubleClick(id, e){
-
-        const data = {id, e}
-        Actions.onTitleDoubleClick(data);
-    }
-
-    handleTitleEdit(e, id, text){
-        const data = {e, id, text, this}
-        Actions.onTitleEdit(data);
-    }
-
-    handleTagEntry(e) {
-
-        const data = {e}
-        Actions.onTagEntry(data);
-
-    }
     
     render() {
 

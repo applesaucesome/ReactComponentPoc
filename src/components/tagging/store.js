@@ -14,17 +14,17 @@ class Store {
         // give a default value
         this.state = {
             initialCount: [{
-                title: 'hi'
+                tag: 'hi'
             }, {
-                title: 'hello'
+                tag: 'hello'
             }, {
-                title: 'bye'
+                tag: 'bye'
             }],
             changeContent: true,
             inputText: '',
             editTag: false,
-            currentTitle: 0,
-            maxTitles: 5,
+            currentTag: 0,
+            maxTags: 5,
             refs: undefined
         };
     }
@@ -34,8 +34,7 @@ class Store {
         
         this.setState({
             refs: data
-        })
-
+        });
 
     }
 
@@ -46,8 +45,8 @@ class Store {
             editTag: false
         });
 
-        if (this.state.initialCount.length < this.state.maxTitles) {
-            React.findDOMNode(this.state.refs.tagEntry.refs.tagEntryInput).focus();
+        if (this.state.initialCount.length < this.state.maxTags) {
+            React.findDOMNode(this.state.refs.tagEntry).focus();
         }
 
     }
@@ -57,7 +56,7 @@ class Store {
     @bind(actions.onRemoveItem)
     removeItem(data) {
 
-        this.state.initialCount.splice(data[0], 1);
+        this.state.initialCount.splice(data.i, 1);
 
         this.setState({
             initialCount: this.state.initialCount
@@ -65,27 +64,21 @@ class Store {
 
     }
 
-    @bind(actions.onTitleDoubleClick)
-    titleDoubleClick(data) {
-        
-        // console.log('titleDoubleClick arguments -', arguments);
-        // console.log('titleDoubleClick data -', data);
-        // console.log('titleDoubleClick this -', this);
+    @bind(actions.onTagDoubleClick)
+    tagDoubleClick(data) {
 
         this.setState({
             editTag: true,
-            currentTitle: data[0]
+            currentTag: data.i
         });
-
 
     }
 
-    @bind(actions.onTitleEdit)
-    titleEdit(data) {
-        // console.log('titleEdit', data)
+    @bind(actions.onTagEdit)
+    tagEdit(data) {
         
-        this.state.initialCount.splice(this.state.currentTitle, 1, {
-            title: data[2]
+        this.state.initialCount.splice(this.state.currentTag, 1, {
+            tag: data.inputText
         });
 
         this.setState({
@@ -93,11 +86,10 @@ class Store {
             editTag: false
         });
 
-        console.log('this.state.initialCount=', this.state.initialCount)
-        console.log('this.state.maxTitles=', this.state.maxTitles)
+
         // Refocus to input once you edit a tag
-        if (this.state.initialCount.length < this.state.maxTitles) {
-            React.findDOMNode(this.state.refs.tagEntry.refs.tagEntryInput).focus();
+        if (this.state.initialCount.length < this.state.maxTags) {
+            React.findDOMNode(this.state.refs.tagEntry).focus();
         }
 
     }
@@ -111,7 +103,7 @@ class Store {
         const inputText = data.e.target.value;
 
         this.state.initialCount.push({
-            title: inputText
+            tag: inputText
         });
 
         this.setState({

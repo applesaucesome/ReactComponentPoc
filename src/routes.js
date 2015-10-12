@@ -8,7 +8,7 @@ import SubHeader from 'components/subheader';
 import PitchPhase from 'components/pitch-phase/component';
 import FluxComponent from 'components/flux-component/component';
 
-const routes = (  
+const routes = (
   <Route path='/' component={Main}>
     <IndexRoute component={FluxComponent}/>
     <Route path='route1' component={PitchPhase}/>

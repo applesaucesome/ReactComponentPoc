@@ -3,7 +3,9 @@ import React from 'react';
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            test: [1, 2, 3]
+        };
 
         console.log(this.props);
 
@@ -13,12 +15,7 @@ class Header extends React.Component {
 
             <div>
             <h1>TEST HEADER COMPONENT</h1>
-
-                {
-                    this.props.test.map(function(item, i){
-                        return( <h5>{item}</h5>);
-                    })
-                }
+            {this.props.children}
             </div>
         );
     }
