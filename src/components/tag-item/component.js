@@ -17,29 +17,10 @@ class Tags extends React.Component {
         this.props.onMount(this.refs);
         
     }
-    componentWillUpdate(nextProps, nextState){
-        // console.log('nextProps=', nextProps);
-        // console.log('nextState=', nextState);
 
-    }
-    componentDidUpdate(prevProps, prevState){
+    onKeyDown(i, e) {
 
-        // console.log('prevProps=', prevProps);
-        // console.log('prevState=', prevState);
-    }
-    onChange(inputName, e){
-        const inputText = e.target.value;
-
-        let inputValue = {};
-        
-        inputValue[inputName] = inputText;
-        this.setState(inputValue);
-
-    }
-    onKeyDown(i, inputName, e) {
-
-        const inputText = this.state[inputName];
-
+        let inputText = e.target.value;
 
         if (e.keyCode === 13 || e.keyCode === 9) {
                 
@@ -55,12 +36,6 @@ class Tags extends React.Component {
                 this.props.onTagEntry(e, inputText);
             }
 
-
-            // Clear out the input
-            let inputValue = {};
-            
-            inputValue[inputName] = '';
-            this.setState(inputValue);
    
         }
 
@@ -73,7 +48,7 @@ class Tags extends React.Component {
         // If we're at the max amount of tags, don't render the input
         if (this.props.initialCount.length < this.props.maxTags) {
             // bind this without an iterator parameter, since this will be used for tag entry and not tag editing
-            inputEl = <Input autoFocus ref="tagEntry" name="tagEntry" {...this.state} onChange={this.onChange.bind(this, 'tagEntry')} onKeyDown={this.onKeyDown.bind(this, undefined, 'tagEntry')} />;
+            inputEl = <Input autoFocus ref="tagEntry" {...this.state} onKeyDown={this.onKeyDown.bind(this, undefined)} />;
         }
         
 
@@ -96,18 +71,16 @@ class Tags extends React.Component {
                         // If we're not editing this tag, render it out normall
                         if (!editTag) {
 
-                            tag = <div style={{margin: 10 + 'px', border: 1+'px solid #cc0000', padding: 10+'px'}} >
-                                    <span className="tag-container" onDoubleClick={this.props.onTagDoubleClick.bind(this, i)}>
-                                        <span>Tag:</span> {item.tag}
-                                    </span>
-                                    <span style={{ margin: 10 + 'px' }} className="remove" onClick={this.props.onRemoveItem.bind(this, i)}>X</span>
+                            tag = <div className="tagging__tag-item" onDoubleClick={this.props.onTagDoubleClick.bind(this, i)} >
+                                    <span className="tagging__tag-value">{item.tag}</span> - 
+                                    <span className="tagging__tag-remove" className="remove" onClick={this.props.onRemoveItem.bind(this, i)}>X</span>
                                 </div>;                            
 
                         } else {
                             // if we are editing this tag, render the input component as well as a cancel button
-                            tag = <Input autoFocus ref="tagEdit" name="tagEdit" onChange={this.onChange.bind(this, 'tagEdit')} onKeyDown={this.onKeyDown.bind(this, i, 'tagEdit')} />;
+                            tag = <Input autoFocus ref="tagEdit" {...this.props} onKeyDown={this.onKeyDown.bind(this, i)} />;
                             
-                            cancelEdit = <span style={{ margin: 10 + 'px' }} className="cancelEdit" onClick={this.props.onCancelEdit}>[cancel edit]</span>;
+                            cancelEdit = <span className="tagging__tag-cancel-edit" onClick={this.props.onCancelEdit}>[cancel edit]</span>;
 
                         }
 

@@ -67,8 +67,12 @@ class Store {
     @bind(actions.onTagDoubleClick)
     tagDoubleClick(data) {
 
+        
+        const tagValue = data.e.target.innerText;
+
         this.setState({
             editTag: true,
+            editTagValue: tagValue,
             currentTag: data.i
         });
 

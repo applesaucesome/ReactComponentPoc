@@ -5,6 +5,27 @@ import Actions from './actions';
 import Tagging from '../tagging/component';
 
 
+function fooDecorator(functionParam){
+
+    functionParam.prototype.newFunction = function(){
+        console.log('blahBlah');
+    }
+
+    return functionParam;
+}
+
+
+@fooDecorator
+class testFunction{
+    constructor(testParam){
+        return testParam;
+    }
+}
+
+var decoratedFunction = new testFunction();
+decoratedFunction.newFunction();
+
+
 @connectToStores
 class PitchPhase extends React.Component {
     constructor(props) {
@@ -12,6 +33,9 @@ class PitchPhase extends React.Component {
 
         // Expected initial data set
         this.state = {};
+
+
+        // foo(testFunction)
 
     }
 

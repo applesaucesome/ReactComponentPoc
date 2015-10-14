@@ -1,0 +1,17 @@
+.tagging__tag-item{
+    margin: 10px;
+    border: 1px solid #cc0000;
+    padding: 10px;
+}
+
+.tagging__tag-value{
+    
+}
+
+.tagging__tag-remove{
+    margin: 10px;
+}
+
+.tagging__tag-cancel-edit{
+    margin: 10px;
+}

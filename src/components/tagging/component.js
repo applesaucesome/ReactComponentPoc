@@ -5,6 +5,7 @@ import Store from './store';
 
 import Tags from '../tag-item/component';
 import AltContainer from 'alt/AltContainer';
+import './style.css';
 
 /**
 *

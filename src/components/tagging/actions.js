@@ -26,8 +26,8 @@ class Actions {
         this.dispatch(parsedData)
     }
     onTagDoubleClick(i, e) {
-        e.persist();
-        // console.log('double click argu', arguments)
+
+
         const parsedData = {
             i: i,
             e: e
