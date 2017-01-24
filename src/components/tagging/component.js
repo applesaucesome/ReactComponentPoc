@@ -32,7 +32,9 @@ class Tagging extends React.Component {
     static getPropsFromStores(props) {
         return Store.getState();
     }*/
-
+    componentWillMount(){
+        Actions.onWillMount();
+    }
     
     render() {
 

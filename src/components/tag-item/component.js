@@ -72,7 +72,7 @@ class Tags extends React.Component {
                         if (!editTag) {
 
                             tag = <div className="tagging__tag-item" onDoubleClick={this.props.onTagDoubleClick.bind(this, i)} >
-                                    <span className="tagging__tag-value">{item.tag}</span> - 
+                                    <span className="tagging__tag-value">{item}</span> - 
                                     <span className="tagging__tag-remove" className="remove" onClick={this.props.onRemoveItem.bind(this, i)}>X</span>
                                 </div>;                            
 

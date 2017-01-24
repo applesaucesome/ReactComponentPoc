@@ -29,6 +29,19 @@ class Store {
         };
     }
 
+    @bind(actions.onWillMount)
+    onComponentWillMount(data){
+
+        const json = JSON.parse(data);
+        console.log('~~~~ onComponentWillMount ~~~~', json)
+        
+        this.setState({
+            initialCount: json.tags
+        });
+
+        console.log('this state', this.state)
+    }
+
     @bind(actions.onMount)
     onComponentMount(data){
         

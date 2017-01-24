@@ -10,6 +10,32 @@ class Actions {
         // if you don't need to parse anything and just want to generate actions to pass to the dispatcher
         // this.generateActions('onMount', 'onCancelEdit', 'onRemoveItem', 'onTagDoubleClick', 'onTagEdit', 'onTagEntry');
     }
+    onWillMount(){
+
+        let self = this;
+
+        var result = fetch('/api/ideas/56018d113d39e933e442c39a')
+        result.then(function(response) {
+
+          console.log('response', response);
+          console.log('header', response.headers.get('Content-Type'));
+
+          return response.text();
+
+        }).then(function(text) {
+
+            // console.log('got text', text);
+
+            self.dispatch(text);
+
+        }).catch(function(ex) {
+
+          console.log('failed', ex)
+
+        });
+        
+
+    }
     onMount(data) {
 
         this.dispatch(data)

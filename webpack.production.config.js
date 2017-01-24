@@ -5,11 +5,11 @@ var webpack = require('webpack'),
 
 
 module.exports = {
-    target: 'web',
+    target: 'node',
     cache: true,
     entry: {
         module: path.join(srcPath, 'module.js'),
-        common: ['react', 'react-router']
+        common: ['history', 'react', 'react-router']
     },
     resolve: {
         root: srcPath,
@@ -17,9 +17,9 @@ module.exports = {
         modulesDirectories: ['node_modules', 'src']
     },
     output: {
-        path: path.join(__dirname, 'tmp'),
+        path: path.join(__dirname, 'public'),
         publicPath: '',
-        filename: '[name].js',
+        filename: '/[name].js',
         library: ['Example', '[name]'],
         pathInfo: true
     },
@@ -30,6 +30,10 @@ module.exports = {
                 test: /\.js?$/,
                 exclude: /node_modules/,
                 loader: 'babel?cacheDirectory'
+            }, {
+                test: /\.css$/,
+                loader: 'style!css'
+                // loader: 'style-loader!css-loader'
             }
         ]
     },
@@ -45,12 +49,12 @@ module.exports = {
             sourceMap: false
         }]),
         new webpack.DefinePlugin({
-            'process.env': {
+            /*'process.env': {
                 // This has effect on the react lib size
                 'NODE_ENV': JSON.stringify('production')
-            }
+            }*/
         }),
-        new webpack.optimize.CommonsChunkPlugin('common', 'common.js'),
+        new webpack.optimize.CommonsChunkPlugin('common', '/common.js'),
         new HtmlWebpackPlugin({
             inject: true,
             template: 'src/index.html'
@@ -61,7 +65,7 @@ module.exports = {
     debug: false,
     devtool: 'eval-cheap-module-source-map',
     devServer: {
-        contentBase: './tmp',
+        contentBase: './public',
         historyApiFallback: true
     }
 };

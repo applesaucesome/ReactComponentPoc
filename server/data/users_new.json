@@ -1,0 +1,22 @@
+[{
+    "id": "z000000",
+    "email": "alessandro.miralles@target.com",
+    "owner":["5577525c23f20a9ad49c72f4","5577525c23f20a9ad49c72f5"],
+    "viewed": ["5577525c23f20a9ad49c72f4","5577525c23f20a9ad49c72f5","5577525c23f20a9ad49c72f6"],
+    "votes": ["5577525c23f20a9ad49c72f4","5577525c23f20a9ad49c72f5"]
+},
+{
+    "id": "z000001",
+    "email": "peter.schultz@target.com",
+    "owner":["5577525c23f20a9ad49c72f5"],
+    "viewed": [],
+    "votes": []
+},
+{
+    "id": "z000002",
+    "email_id": "kyle.leichtle@target.com",
+    "owner":["5577525c23f20a9ad49c72f6"],
+    "viewed": ["5577525c23f20a9ad49c72f4","5577525c23f20a9ad49c72f5","5577525c23f20a9ad49c72f6"],
+    "votes": ["5577525c23f20a9ad49c72f4","5577525c23f20a9ad49c72f5","5577525c23f20a9ad49c72f6"]
+}
+]
