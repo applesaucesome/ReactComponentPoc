@@ -1,72 +1,29 @@
-var webpack = require('webpack'),
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
-    path = require('path'),
-    srcPath = path.join(__dirname, 'src');
-
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-    target: 'web',
-    cache: true,
-    entry: {
-        module: path.join(srcPath, 'module.js'),
-        common: ['history', 'react', 'react-router']
-    },
-    resolve: {
-        root: srcPath,
-        extensions: ['', '.js'],
-        modulesDirectories: ['node_modules', 'src']
-    },
-    output: {
-        path: path.join(__dirname, 'public'),
-        publicPath: '',
-        filename: '/[name].js',
-        library: ['Example', '[name]'],
-        pathInfo: true
-    },
-
-    module: {
-        loaders: [
-            {
-                test: /\.js?$/,
-                exclude: /node_modules/,
-                loader: 'babel?cacheDirectory'
-            }, 
-            {
-                test: /\.css$/,
-                loader: 'style!css'
-                // loader: 'style-loader!css-loader'
-            }
-        ]
-    },
-    plugins: [
-        new webpack.optimize.LimitChunkCountPlugin({
-            maxChunks: 15
-        }),
-        new webpack.optimize.MinChunkSizePlugin({
-            minChunkSize: 10000
-        }),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin([{
-            sourceMap: false
-        }]),
-        new webpack.DefinePlugin({
-            /*'process.env': {
-                // This has effect on the react lib size
-                'NODE_ENV': JSON.stringify('production')
-            }*/
-        }),
-        new webpack.optimize.CommonsChunkPlugin('common', '/common.js'),
-        new HtmlWebpackPlugin({
-            inject: true,
-            template: 'src/index.html'
-        }),
-        new webpack.NoErrorsPlugin()
-    ],
-
-    debug: false,
-    devtool: 'eval-cheap-module-source-map',
-    devServer: {
-        contentBase: './public',
-        historyApiFallback: true
+  context: path.resolve(__dirname, './src'),
+  entry: {
+    app: './app.js',
+  },
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, './dist/assets'),
+    publicPath: '/assets',                          // New
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, './src'),  // New
+  },
+  module: {
+    loaders: [
+    {
+      test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
+      loader: 'babel-loader',
+      query: {
+        presets: ['react','es2015']
+      }
     }
+  ]
+  }
 };
