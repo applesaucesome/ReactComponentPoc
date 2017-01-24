@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React from 'react';
 import Input from '../input/component';
 
 class Tags extends React.Component {

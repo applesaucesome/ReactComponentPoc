@@ -8,11 +8,12 @@ module.exports = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, './dist/assets'),
-    publicPath: '/assets',                          // New
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/',                          // New
   },
   devServer: {
-    contentBase: path.resolve(__dirname, './src'),  // New
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
   },
   module: {
     loaders: [
