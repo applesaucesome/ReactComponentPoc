@@ -17,7 +17,7 @@ import './style.css';
 * @anotherDecorator
 *
 **/
-// @connectToStores
+@connectToStores
 class Tagging extends React.Component {
     constructor(props) {
         super(props);

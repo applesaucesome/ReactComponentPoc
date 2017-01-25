@@ -53,15 +53,13 @@ proto.select = function(event) {
             event.stopPropagation();
         }
         var val = active.attr('data-value');
-        Radio.channel('search').trigger('searchTerm', { searchTerm: val });
+        
+        // Fire off a custom search event when a result is selected
+        var event = new Event('search');        
+        elem.dispatchEvent(event);
+
     }
 
-    /**
-    * Disabled so that we can emit the query to through backbone Radio
-    **/
-    /*self.element
-        .value(self.updater(val))
-        .emit('change');*/
 
     return self.hide();
 };
